@@ -1,6 +1,23 @@
-
-<form [formGroup]="form" (ngSubmit)="submit()">
-    <input formControlName="email" placeholder="Email">
-    <input type="password" formControlName="password" placeholder="Password">
-    <button type="submit">Login</button>
-  </form>
+ <div class="login-container">
+  <div class="login-card">
+    <div class="logo-area">
+      <h1 class="brand">ANG<span>21</span></h1>
+      <p>Please enter your credentials</p>
+    </div>
+    
+    <form class="login-form" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="input-group">
+        <label>Email Address</label>
+        <input type="email"  formControlName="email" placeholder="name@example.com">
+      </div>
+      
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password" formControlName="password" placeholder="••••••••">
+      </div>
+      
+      <button type="submit" class="btn-primary">Sign In</button>
+      <a href="#" class="forgot-link">Forgot password?</a>
+    </form>
+  </div>
+</div>

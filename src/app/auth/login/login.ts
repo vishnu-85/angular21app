@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import * as AuthActions from '../store/auth.actions';
 
@@ -11,17 +11,25 @@ import * as AuthActions from '../store/auth.actions';
 })
 export class LoginComponent {
 
-  private fb = inject(FormBuilder);
-  private store = inject(Store);
+  
+  form!:FormGroup;  
+  constructor(private store: Store, private fb:FormBuilder){
 
-  form = this.fb.group({
-    email: ['', Validators.required],
-    password: ['', Validators.required]
-  });
+    this.form = this.fb.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
 
+  }
+
+  
   submit() {
+    console.log('form', this.form.value);
+    console.log('valid , ',  this.form.valid);
+        
     if (this.form.valid) {
-      this.store.dispatch(AuthActions.login(this.form.value as any));
+      const {email, password} = this.form.value;
+     this.store.dispatch(AuthActions.login({ email, password }));
     }
   }
 }

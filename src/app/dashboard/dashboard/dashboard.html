@@ -1,1 +1,33 @@
-<p>dashboard works!</p>
+<div class="dashboard-layout">
+  <aside class="sidebar">
+    <h2 class="brand">ANG<span>21</span></h2>
+    <nav>
+      <a href="#" class="active">Overview</a>
+      <a href="#">Analytics</a>
+      <a href="#">Users</a>
+      <a href="#">Settings</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <header>
+      <h2>Welcome {{ user.name }}</h2>
+      <div class="user-profile"></div>
+    </header>
+
+    <div class="stats-grid">
+      <div class="card border-blue">
+        <h3>Active Sessions</h3>
+        <p class="stat-value">1,284</p>
+      </div>
+      <div class="card border-red">
+        <h3>Total Revenue</h3>
+        <p class="stat-value">$12.4k</p>
+      </div>
+      <div class="card border-blue">
+        <h3>System Health</h3>
+        <p class="stat-value">99.9%</p>
+      </div>
+    </div>
+  </main>
+</div>

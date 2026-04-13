@@ -1,17 +1,37 @@
-import { inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, delay } from 'rxjs';
+import { AuthService } from '../../core/services/auth.service';
 import * as AuthActions from './auth.actions';
+import { catchError, map, mergeMap, of, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
+@Injectable()
 export class AuthEffects {
 
-  actions$ = inject(Actions);
+  private actions$ = inject(Actions);
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.login),
-      delay(1000),
-      map(() => AuthActions.loginSuccess({ token: 'fake-jwt-token' }))
+      mergeMap(action =>
+        this.authService.login(action.email, action.password).pipe(
+          map(user => AuthActions.loginSuccess({ user })),
+          catchError(error => of(AuthActions.loginFailure({ error })))
+        )
+      )
     )
+  );
+
+  loginSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.loginSuccess),
+      tap(() => {
+        
+        this.router.navigate(['/dashboard']);
+      })
+    ),
+    { dispatch: false } // important
   );
 }

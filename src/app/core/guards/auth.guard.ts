@@ -9,7 +9,7 @@ export const authGuard: CanActivateFn = () => {
 
   return store.select('auth').pipe(
     map((state: any) => {
-      if (state.token) return true;
+      if (state.user) return true;
       router.navigate(['/login']);
       return false;
     })
