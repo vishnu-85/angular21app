@@ -1,33 +1,64 @@
-<div class="dashboard-layout">
+<div class="app-container">
   <aside class="sidebar">
-    <h2 class="brand">ANG<span>21</span></h2>
-    <nav>
-      <a href="#" class="active">Overview</a>
-      <a href="#">Analytics</a>
-      <a href="#">Users</a>
-      <a href="#">Settings</a>
-      <a (click)="logout()">Logout</a>
+    <div class="logo-area">
+      <div class="logo-img"><img src="../../../assets/logo_ai.png" alt=""></div>
+    </div>
+    <div class="nav-item new-chat"><span>+</span> New chat</div>
+    <nav class="history">
+      <div class="nav-item">Search chats</div>
+      <div class="nav-item">Projects</div>
     </nav>
   </aside>
 
-  <main class="content">
-    <header>
-      <h2>Welcome {{ user.name }}</h2>
-      <div class="user-profile"></div>
-    </header>
+  <main class="chat-area">
+    <div class="main-content">
+      @if(!messages.length){<h1>How can I help, {{user?.name}}?</h1>}
+      <div class="chat-messages">
+        @for (msg of messages; track msg) {
+        <div [class.user-message]="msg.isUser" [class.bot-message]="!msg.isUser">
+          @if(msg.isUser){
+          <div class="message-bubble user-bubble">
+            {{ msg.text }}
+          </div>
+          }
+          @if(!msg.isUser){
+          <div class="message-bubble bot-bubble">
+            <p><strong>Here is : </strong> {{ msg.summary }}</p>
+            @if (msg.data && msg.data.length) {
+            <div>
+               @for (item of msg.data; track $index) {
+                  <div>
+                    @for(key of getObjectKeys(item); track $index) {
+                    <p>{{ item[key] }}</p>
+                    }
+                  </div>
+                  }
+            </div>
+            }
+            @if(msg.links && msg.links.length){
+            <div class="links">
+              @for (link of msg.links; track $index) {
+              <a [routerLink]="link.url" class="detail-link">{{ link.label }}</a>
+              }
+            </div>
+            }
+          </div>
+          }
+        </div>
+        }
+      </div>
+      <form [formGroup]="chatForm" (ngSubmit)="sendMessage()">
+        <div class="input-container">
+          <input type="text" formControlName="userInput" placeholder="Ask about stock, fund, markets and industry...">
+          <button class="voice-btn" type="button"><img src="../../../assets/mic.svg" alt=""></button>
+          <button type="submit" class="d-none">Send</button>
+        </div>
+      </form>
 
-    <div class="stats-grid">
-      <div class="card border-blue">
-        <h3>Active Sessions</h3>
-        <p class="stat-value">1,284</p>
-      </div>
-      <div class="card border-red">
-        <h3>Total Revenue</h3>
-        <p class="stat-value">$12.4k</p>
-      </div>
-      <div class="card border-blue">
-        <h3>System Health</h3>
-        <p class="stat-value">99.9%</p>
+      <div class="actions">
+        <button>Create an image</button>
+        <button>Write or edit</button>
+        <button>Look something up</button>
       </div>
     </div>
   </main>

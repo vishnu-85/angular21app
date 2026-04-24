@@ -1,40 +1,49 @@
-
-// Include theming for Angular Material with `mat.theme()`.
-// This Sass mixin will define CSS variables that are used for styling Angular Material
-// components according to the Material 3 design spec.
-// Learn more about theming and how to use it for your application's
-// custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 
 html {
   height: 100%;
-  @include mat.theme((
-    color: (
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-    ),
-    typography: Roboto,
-    density: 0,
-  ));
+  @include mat.theme((color: (primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    ));
+}
+
+:root {
+  --color-primary-teal: #1ABC9C;
+  --color-mint-btn: #E8F8F5;
+  --color-text-dark: #121212;
+  --color-text-light: #ffffff;
+  --color-border-light: #dddddd;
+  --color-light-mint: #F0F9F8;
 }
 
 body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
-  color-scheme: light;
-
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
+  background-color: var(--color-text-light);
+  color: var(--color-text-dark);
   font: var(--mat-sys-body-medium);
-
-  // Reset the user agent margin.
   margin: 0;
   height: 100%;
 }
+
+p{
+  margin: 0;
+  padding: 0;
+}
+
+.bg-gradient {
+  background: linear-gradient(98.45deg, #1E3A5F 0%, #1ABC9C 100%);
+}
+
+.btn-gradient {
+  background: linear-gradient(100.93deg, #17C3A9 8.18%, #19CF8E 92.72%);
+}
+
+.d-none{
+  display: none;
+}
+
 /* You can add global styles to this file, and also import other style files */
 
 // LOGIN
@@ -43,117 +52,216 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #1e3a8a 0%, #dc2626 100%); /* Blue to Red */
+  color: var(--color-text-dark);
+  background: linear-gradient(98.45deg, #1E3A5F 0%, #1ABC9C 100%);
   font-family: 'Segoe UI', sans-serif;
 }
 
+.logo-area {
+  text-align: center;
+}
+
+.logo-area {
+  p {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-primary-teal);
+    padding: 0.5rem;
+  }
+
+  .logo-img img {
+    width: 100px;
+    height: 90px;
+  }
+}
+
 .login-card {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--color-text-light);
   padding: 2.5rem;
   border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   width: 100%;
   max-width: 400px;
 }
-
-.brand {
-  color: #1e3a8a;
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
+ 
+.input-group {
+  margin-bottom: 1.5rem;
 }
 
-.brand span { color: #dc2626; }
-
-.input-group { margin-bottom: 1.5rem; }
-
-label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #444; }
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
 
 input {
   width: 100%;
   padding: 12px;
-  border: 2px solid #e5e7eb;
+  border: 2px solid var(--color-border-light);
   border-radius: 8px;
   outline: none;
   transition: border-color 0.3s;
 }
 
-input:focus { border-color: #1e3a8a; }
+input:focus {
+  border-color: var(--color-primary-teal);
+}
 
 .btn-primary {
   width: 100%;
   padding: 12px;
-  background: #1e3a8a;
-  color: white;
+  background: linear-gradient(100.93deg, #17C3A9 8.18%, #19CF8E 92.72%);
+  color: var(--color-text-light);
   border: none;
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
+  margin-bottom: 0.5rem;
   transition: transform 0.2s, background 0.3s;
 }
 
 .btn-primary:hover {
-  background: #dc2626;
+  background: linear-gradient(100.93deg, #19CF8E 8.18%, #17C3A9 92.72%);
   transform: translateY(-2px);
 }
 
+
 // Dashbioard
 
-.dashboard-layout {
+.app-container {
   display: flex;
-  min-height: 100vh;
-  background: #f3f4f6;
+  width: 100vw;
+  height: 100vh;
+  background: var(--color-light-mint);
 }
 
 .sidebar {
-  width: 260px;
-  background: #1e3a8a;
-  color: white;
-  padding: 2rem;
+    width: 260px;
+    background-color: var(--color-light-mint);
+    padding: 20px;
+    border-right: 1px solid var(--color-border-light);
 }
 
-.sidebar .brand { color: white; margin-bottom: 3rem; }
-.sidebar .brand span { color: #f87171; }
-
-nav a {
+.nav-item {
+  padding: 10px;
   cursor: pointer;
-  display: block;
-  color: #cbd5e1;
-  text-decoration: none;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
 }
 
-nav a.active { color: #fff; font-weight: bold; }
+.nav-item:hover {
+  background: var(--color-border-light)
+}
 
-.content { flex: 1; padding: 2rem; }
-
-header {
+.chat-area {
+  flex-grow: 1;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 2rem;
+  background: var(--color-text-light);
 }
 
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
+.main-content {
+  text-align: center;
+  width: 900px;
 }
 
-.card {
-  background: white;
-  padding: 1.5rem;
+.input-container {
+  display: flex;
+  border: 1px solid var(--color-border-light);
+  padding: 5px 15px;
+  border-radius: 30px;
+  margin: 20px 0;
+  align-items: center;
+}
+
+input {
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  font-size: 16px;
+}
+
+.actions button {
+  margin: 5px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: 1px solid var(--color-border-light);
+  background: var(--color-mint-btn);
+  cursor: pointer;
+}
+.voice-btn{
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  img{
+    width: 25px;
+    height: 25px;
+  }
+}
+// Chat bot meessage styles
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  border: 1px solid var(--color-border-light);
+  border-radius: 8px;
+  background: var(--color-text-light);
+}
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+.message-bubble {
+  max-width: 70%;
+  margin: 8px;
+  padding: 8px 5px;
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
-
-.border-blue { border-left: 5px solid #1e3a8a; }
-.border-red { border-left: 5px solid #dc2626; }
-
-.stat-value {
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin-top: 10px;
-  color: #333;
+.user-message {
+  display: flex;
+  justify-content: flex-end;
+}
+.user-bubble {
+  background-color: var(--color-mint-btn);
+  color: var(--color-text-dark);
+  border-radius: 12px 12px 0 12px;
+  padding: 8px 12px;
+}
+.bot-message {
+  display: flex;
+  justify-content: flex-start;
+}
+.bot-bubble {
+  text-align: left;
+  width: 100%;
+  border-radius: 12px 12px 12px 0;
+}
+.links {
+  margin-top: 8px;
+}
+.detail-link {
+  display: inline-block;
+  margin-right: 12px;
+  color: var(--color-primary-teal);
+  text-decoration: none;
+}
+.chat-input {
+  display: flex;
+  padding: 8px;
+  border-top: 1px solid var(--color-border-light);
+}
+.chat-input input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid var(--color-border-light);
+}
+.chat-input button {
+  margin-left: 8px;
+  padding: 8px 16px;
 }

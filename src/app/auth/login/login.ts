@@ -24,9 +24,6 @@ export class LoginComponent {
 
   
   submit() {
-    console.log('form', this.form.value);
-    console.log('valid , ',  this.form.valid);
-        
     if (this.form.valid) {
       const {email, password} = this.form.value;
      this.store.dispatch(AuthActions.login({ email, password }));
